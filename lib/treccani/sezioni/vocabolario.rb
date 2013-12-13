@@ -11,7 +11,7 @@
 class Vocabolario < Treccani
   def get(word)
     {}.tap { |result|
-      page = Nokogiri::HTML open("#{@server}#{get_url(word)}")
+      page = Nokogiri::HTML open(get_url(word))
       wot  = page.at_xpath('//div[@class="spiega attacco"]/p').to_s.split '<br><br>'
       result[:lemma]    = wot.shift.remove_tags[0..-4].strip
       result[:meanings] = wot.join.split(/<strong>[0-9]\.<\/strong>/i).map { |m| m.remove_tags.strip }[1..-1]
@@ -22,6 +22,6 @@ class Vocabolario < Treccani
   def get_url(word)
     url = Nokogiri::HTML(open("#{@server}/vocabolario/tag/#{word}/")).at_xpath('//li[@class="result fs"]/h2/a/@href').to_s
     raise 'Term not found.' if url.empty?
-    url
+    "#{@server}#{url}"
   end
 end

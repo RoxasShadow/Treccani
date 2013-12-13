@@ -10,7 +10,7 @@
 
 class Enciclopedia < Treccani
   def get(word)
-    page = Nokogiri::HTML open("#{@server}#{get_url(word)}")
+    page = Nokogiri::HTML open(get_url(word))
     {}.tap { |result|
       page = page.xpath '//div[@class="spiega attacco"]/p'
       result[:lemma]    = page.shift.text.strip
@@ -23,6 +23,6 @@ class Enciclopedia < Treccani
   def get_url(word)
     url = Nokogiri::HTML(open("#{@server}/enciclopedia/ricerca/#{word}/")).at_xpath('//ol[@class="listing"]/li/h2/a/@href').to_s
     raise 'Term not found.' if url.empty?
-    url
+    "#{@server}#{url}"
   end
 end
