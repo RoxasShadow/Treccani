@@ -20,7 +20,6 @@ class Enciclopedia < Treccani
   end
     alias_method :find, :get
 
-  private
   def get_url(word)
     url = Nokogiri::HTML(open("#{@server}/enciclopedia/ricerca/#{word}/")).at_xpath('//ol[@class="listing"]/li/h2/a/@href').to_s
     raise 'Term not found.' if url.empty?

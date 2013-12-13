@@ -8,7 +8,7 @@ Gem::Specification.new { |s|
   s.homepage      = 'http://www.giovannicapuano.net'
   s.platform      = Gem::Platform::RUBY
   s.summary       = 'RESTful API for Treccani.'
-  s.description   = 'RESTful API to get the meaning and synonyms of italian all the italian terms.'
+  s.description   = 'RESTful API to get the meaning and synonyms of Italian all the italian terms.'
   s.licenses      = 'WTFPL'
 
   s.require_paths = ['lib']
